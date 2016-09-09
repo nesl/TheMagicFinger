@@ -1,0 +1,16 @@
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+*~
+
+#Data
+data
+data/
+
+#Compiled objects
+*.o
+*.pyc
+
+#Swapfiles
+*.swp
+
