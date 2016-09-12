@@ -4,8 +4,7 @@
 *~
 
 #Data
-data
-data/
+external_data
 
 #Compiled objects
 *.o

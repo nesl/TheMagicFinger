@@ -4,7 +4,6 @@ function [acc, grav, gyro, mag, rot] = read_input(path_prefix, varargin)
 % function helps and eases the effort of reading files.
 
 try
-    [path_prefix '_acc.csv']
     raw_acc = csvread([path_prefix '_acc.csv']);
 catch e
     raw_acc = zeros(0, 5);

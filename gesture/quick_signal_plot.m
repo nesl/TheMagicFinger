@@ -1,17 +1,7 @@
-IN_DIR = '../external_data/data/pre_pilot/';
-
-%input_prefix = 'wear_20160907_213514'; 
-%input_prefix = 'wear_20160907_215346';
-%input_prefix = 'wear_20160908_174943';
-%input_prefix = 'wear_20160908_175207';
-%input_prefix = 'wear_20160908_184454';
-%input_prefix = 'wear_20160908_185209';
-input_prefix = 'wear_20160909_121108';  % U U L L R R D D <turn my body 90 deg right> U U L L R R D D
-%input_prefix = 'wear_20160909_121825';  % slowly rotate
+input_prefix = '../external_data/data/pre_pilot/wear_20160909_121108';
 
 
-
-[acc, grav, gyro, mag, rot] = read_input([IN_DIR input_prefix]);
+[acc, grav, gyro, mag, rot] = read_input(input_prefix);
 
 clf
 
