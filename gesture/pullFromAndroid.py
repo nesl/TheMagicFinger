@@ -15,6 +15,6 @@ for fname in files:
 history = set()
 for fname in files:
     prefix = os.path.basename(fname)[:20]
-    if name not in history:
+    if fname not in history:
         print(prefix)
     history.add(prefix)
