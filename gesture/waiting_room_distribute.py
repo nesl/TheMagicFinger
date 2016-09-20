@@ -21,8 +21,9 @@ target_dir = format("data/signs/%s/%s" %(action_name, user_name))
 if not os.path.exists(target_dir):
 	os.makedirs(target_dir)
 
-previous_exp = [x for x in os.listdir(target_dir) if os.path.isdir(x)]
+previous_exp = [x for x in os.listdir(target_dir) ]
 new_exp_idx = len(previous_exp) + 1
+print (previous_exp)
 
 # Copy each experiment to its target folder
 for exp_prefix in waiting_room_files_prefix:
@@ -38,4 +39,4 @@ for exp_prefix in waiting_room_files_prefix:
 		print("")
 		new_exp_idx += 1
 	else:
-		print("!!! Skipping incomplete experiment.")
+		print("!!! Skipping incomplete experiment.\n")
