@@ -28,7 +28,7 @@ print (previous_exp)
 # Copy each experiment to its target folder
 for exp_prefix in waiting_room_files_prefix:
 	exp_files = [x for x in waiting_room_files if x.find(exp_prefix) != -1]
-	if (len(exp_files) == 5):
+	if (len(exp_files) == 6):
 		# Create experiment target_dir
 		new_exp_path = format("%s/%04d" %(target_dir, new_exp_idx))
 		os.makedirs(new_exp_path)
@@ -39,4 +39,4 @@ for exp_prefix in waiting_room_files_prefix:
 		print("")
 		new_exp_idx += 1
 	else:
-		print("!!! Skipping incomplete experiment.\n")
+		print("!!! Skipping incomplete experiment %s.\n" %exp_prefix)
