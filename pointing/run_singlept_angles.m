@@ -6,8 +6,9 @@ addpath('utilities');
 
 %% Raw Data Log Folder
 %logfolder = 'C:\Users\Alanwar\Dropbox\Pointing\test01\';
-logfolder = 'C:\Users\Alanwar\Dropbox\gesture\newpointing\';
-
+%logfolder = 'C:\Users\Alanwar\Dropbox\gesture\newpointing\';
+%logfolder = 'C:\Users\Alanwar\Dropbox\gesture\Bojang\';
+logfolder = 'C:\Users\Alanwar\Dropbox\gesture\differentpoints\';
 %% Node/Network configuration
 configfile = 'config/nodepositions_nesl_mobile_gesture';
 
@@ -44,7 +45,7 @@ all_angles =[];
 index =1;
 for i=1:length(point_idxs_old)
     
-    if(anchor_angles_old(i)*180/pi < 60)
+    if(anchor_angles_old(i)*180/pi < 50 && anchor_ids_old(i)~=1)
         point_idxs=[point_idxs;point_idxs_old(i)];
         point_times=[point_times;point_times_old(i)];
         point_start(index,:)=point_start_old(i,:);
@@ -56,6 +57,9 @@ for i=1:length(point_idxs_old)
     end
     
 end
+
+anchor_ids
+
 cfigure(20,12);
 [ff,xxi] = ksdensity( anchor_angles * 180/pi);
 plot(xxi,ff)
@@ -121,6 +125,9 @@ for i=1:length(point_idxs)
         end
     end
     
+    if  size(anc_xyz,1) <=2
+        continue;
+    end
     % least squares to get the start and stop location of pointing action
     fcns = @(xyzz) sqrt(sum((repmat(xyzz,size(anc_xyz,1),1) - anc_xyz).^2, 2)) - anc_rng_s;
     fcnf = @(xyzz) sqrt(sum((repmat(xyzz,size(anc_xyz,1),1) - anc_xyz).^2, 2)) - anc_rng_f;
@@ -334,7 +341,7 @@ ylabel 'Out-of-bag classification error';
 %% Cooperative detection, minimum overhead
 disp('===== Min-cooperative detection =====');
 aid_guesses = [];
-
+anchor_ids_final =[];
 for i=1:length(point_idxs)
     % pointing info
     xyz_start = point_start(i,:)';
@@ -362,6 +369,9 @@ for i=1:length(point_idxs)
         end
     end
     
+    if  size(anc_xyz,1) <=2
+        continue;
+    end
     % least squares for start and stop location
     fcns = @(xyz) sqrt(sum((repmat(xyz,size(anc_xyz,1),1) - anc_xyz).^2, 2)) - anc_rng_s;
     fcnf = @(xyz) sqrt(sum((repmat(xyz,size(anc_xyz,1),1) - anc_xyz).^2, 2)) - anc_rng_f;
@@ -427,11 +437,12 @@ for i=1:length(point_idxs)
     [~,idx] = max(Cvals); %Cs
     aid_guess = Aids(idx);
     aid_guesses = [aid_guesses; aid_guess];
+    anchor_ids_final = [anchor_ids_final;aid];
     
 end
 
-nCorrect = sum(aid_guesses == anchor_ids);
-fprintf('Accuracy: %f\n', nCorrect/length(anchor_ids));
+nCorrect = sum(aid_guesses == anchor_ids_final);
+fprintf('Accuracy: %f\n', nCorrect/length(anchor_ids_final));
 
 
 %%

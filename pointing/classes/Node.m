@@ -26,7 +26,7 @@ classdef Node < handle
         
         % --- initial variances ---
         % initial position variance, dependent on area size
-        vari_p = [1; 1; 1];
+        vari_p = [0; 0; 0];
         % clock offset is uniform [0,17] roughly, or 24 var
         vari_co = 1e-3;
         % initial bias could be as high as +/- 2ppm - +/- 2ppm = +/-4ppm (uniform)

@@ -28,5 +28,5 @@ results = multisvm(TrainingSet, GroupTrain, TestSet);
 disp('multi class problem');
 disp(results);
 
-N = size(true_features,1);
-results = multisvm( true_features(1:N/2,:), true_label(1:N/2), true_features(N/2+1:end,:) );
+% N = size(true_features,1);
+% results = multisvm( true_features(1:N/2,:), true_label(1:N/2), true_features(N/2+1:end,:) );

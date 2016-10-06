@@ -7,16 +7,16 @@ xyz = dp.mocaplogs(:,3:5);
 
 %% Find pointing sessions
 % a point is defined as a short motion in a line followed by a retrograde
-MINPOINTDIST = 0.60; % m
+MINPOINTDIST = 0.20; % m
 MINPOINTDWELL = 0.1;  % s
 POINTBACKOFF = 1.3;   % s
 WINSIZE = 0.5; % s
-WINOVERLAP = 0.45; % s
+WINOVERLAP = 0.4; % s
 
 tstart = tstamps(1);
 tstop = tstamps(end);
 
-displacements = [];
+displacements_old = [];
 disptimes = [];
 
 for t=tstart:(WINSIZE-WINOVERLAP):tstop
@@ -32,9 +32,11 @@ for t=tstart:(WINSIZE-WINOVERLAP):tstop
     dz = abs( xyz(idxs(end),3) - xyz(idxs(1),3) );
     dxyz = dx + dy + dz;
     
-    displacements = [displacements; dxyz];
+    displacements_old = [displacements_old; dxyz];
     disptimes = [disptimes; t];
 end
+
+displacements = smooth(displacements_old);
 
 plot(disptimes-tstart,displacements)
 xlabel('Time (sec)');
@@ -44,7 +46,8 @@ ylabel('Displacement (m)');
 [peaks, locs] = findpeaks(displacements, 'MinPeakHeight', MINPOINTDIST);
 peaktimes = disptimes(locs);
 
-plot(disptimes, displacements, 'b-');
+plot(disptimes , displacements, 'b-');
+
 hold on;
 plot(peaktimes, peaks, 'rs');
 

@@ -1,3 +1,29 @@
+run the following files with 2345
+run_singlept_manual.m
+run_singlept_manual_theta_out.m
+
+with theta :
+Type 2 : RF : Accuracy: 0.841463
+linear Accuracy: 0.463415
+rbf Accuracy: 0.664634
+quadratic Accuracy: 0.567073
+
+Type 1 : RF Accuracy: 0.810976
+linear Accuracy: 0.451220
+rbf Accuracy: 0.646341
+quadratic Accuracy:0.500000, 0.57926
+
+wihtout theta
+Type 2 : RF Accuracy: 0.804878
+linear Accuracy: 0.40853,0.432927
+rbf Accuracy: 0.518293,0.554878
+quadratic Accuracy: 0.500,0.469512, 0.481707
+
+Type 1: RF Accuracy:0.780488, 0.798780, 0.829268,0.835366
+linear Accuracy: 0.414634
+rbf Accuracy:  0.506098
+quadratic Accuracy: 0.500 ,0.487805
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 type 2 with theta
 % ===== Non-cooperative detection =====
 % Training on 375, Testing on 160
