@@ -1,4 +1,4 @@
-function [acc, grav, gyro, mag, rot] = read_input(path_prefix, varargin)
+function [acc, lacc, grav, gyro, mag, rot] = read_input(path_prefix, varargin)
 
 % read_input() reads sensor input. Right now we have two formats, and this
 % function helps and eases the effort of reading files.
@@ -7,6 +7,12 @@ try
     raw_acc = csvread([path_prefix '_acc.csv']);
 catch e
     raw_acc = zeros(0, 5);
+end
+
+try
+    raw_lacc = csvread([path_prefix '_lacc.csv']);
+catch e
+    raw_lacc = zeros(0, 5);
 end
 
 try
@@ -37,26 +43,30 @@ end
 
 % processed sensor data, format: shifted_time(s), x, y, z
 acc = raw_acc(:, 2:end);
+lacc = raw_lacc(:, 2:end);
 gyro = raw_gyro(:, 2:end);
 grav = raw_grav(:, 2:end);
 mag = raw_mag(:, 2:end);
 rot = raw_rot(:, 2:end);
 
-offset = min([acc(:, 1) ; gyro(:, 1) ; grav(:, 1) ; mag(:, 1) ; rot(:, 1)]);
+offset = min([acc(:, 1) ; lacc(:, 1) ; gyro(:, 1) ; grav(:, 1) ; mag(:, 1) ; rot(:, 1)]);
 
 acc(:, 1)  = (acc(:, 1)  - offset) * 1e-9;
+lacc(:, 1)  = (lacc(:, 1)  - offset) * 1e-9;
 gyro(:, 1) = (gyro(:, 1) - offset) * 1e-9;
 grav(:, 1) = (grav(:, 1) - offset) * 1e-9;
 mag(:, 1)  = (mag(:, 1)  - offset) * 1e-9;
 rot(:, 1)  = (rot(:, 1)  - offset) * 1e-9;
 
 % filter outliers
-acc(:, 2:4) = min(30, acc(:, 2:4));
-acc(:, 2:4) = max(-30, acc(:, 2:4));
-gyro(:, 2:4) = min(30, gyro(:, 2:4));
-gyro(:, 2:4) = max(-30, gyro(:, 2:4));
-grav(:, 2:4) = min(30, grav(:, 2:4));
-grav(:, 2:4) = max(-30, grav(:, 2:4));
+acc(:, 2:4) = min(100, acc(:, 2:4));
+acc(:, 2:4) = max(-100, acc(:, 2:4));
+lacc(:, 2:4) = min(100, lacc(:, 2:4));
+lacc(:, 2:4) = max(-100, lacc(:, 2:4));
+gyro(:, 2:4) = min(100, gyro(:, 2:4));
+gyro(:, 2:4) = max(-100, gyro(:, 2:4));
+grav(:, 2:4) = min(100, grav(:, 2:4));
+grav(:, 2:4) = max(-100, grav(:, 2:4));
 
 end
 
