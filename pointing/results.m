@@ -1,6 +1,8 @@
 run the following files with 2345
 run_singlept_manual.m
 run_singlept_manual_theta_out.m
+angle_vs_acc_140cm.m
+angle_vs_acc_75cm.m
 
 with theta :
 Type 2 : RF : Accuracy: 0.841463

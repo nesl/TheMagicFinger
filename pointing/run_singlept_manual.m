@@ -45,7 +45,7 @@ all_angles =[];
 index =1;
 for i=1:length(point_idxs_old)
     
- %   if(anchor_angles_old(i)*180/pi < 70 && anchor_ids_old(i)~=1)
+    if(anchor_angles_old(i)*180/pi < 70 && anchor_ids_old(i)~=1)
         point_idxs=[point_idxs;point_idxs_old(i)];
         point_times=[point_times;point_times_old(i)];
         point_start(index,:)=point_start_old(i,:);
@@ -54,7 +54,7 @@ for i=1:length(point_idxs_old)
         anchor_angles=[anchor_angles;anchor_angles_old(i)];
         all_angles(index,:) =all_angles_old(i,:);
         index = index +1;
-  %  end
+    end
     
 end
 %32540

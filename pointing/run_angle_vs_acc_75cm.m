@@ -58,10 +58,14 @@ for i=1:length(point_idxs_old)
 end
 
 cfigure(20,12); 
-Angle    = [ 90    ,120     ,135    ,150  ];
-accuracy = [95.1220,90.3226,84.6154,81.25];
+Angle_75    = [ 90    ,120     ,135    ,150  ];
+accuracy_75 = [95.1220,90.3226,84.6154,81.25];
 % %140accuracy = [97.8261,94.0,90.3,89.74,78.7234];
-plot(Angle,accuracy)
+plot(Angle_75,accuracy_75,'--')
+hold on
+Angle_140 =     [ 90,120,135,150,180];
+accuracy_140 = [97.8261,94.0,90.3,89.74,78.7234];
+plot(Angle_140,accuracy_140)
 grid on
 xlabel('Angle \alpha (degree)')
 ylabel('Accuracy percentage')
