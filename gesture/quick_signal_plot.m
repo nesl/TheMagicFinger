@@ -1,4 +1,4 @@
-input_prefix = '../external_data/data/pre_pilot/wear_20160909_121108';
+input_prefix = '../external_data/pointing_segmentation/Bharath1/wear_20160928_173802';
 
 
 [acc, grav, gyro, mag, rot] = read_input(input_prefix);
